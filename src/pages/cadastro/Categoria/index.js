@@ -29,9 +29,9 @@ function CadastroCategoria() {
     );
   }
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('Ok Ok');
-    const URL_TOP = 'http://localhost:8080/categorias';
+    const URL_TOP = window.location.hostname.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'http://marcioflix.herokuapp.com/categorias';
     fetch(URL_TOP)
       .then(async (respostaDoServidor) => {
         const resposta = await respostaDoServidor.json();
@@ -39,25 +39,7 @@ function CadastroCategoria() {
           ...resposta,
         ]);
       });
-    /* setTimeout(() => {
-      setCategorias([
-        ...categorias,
-        {
-          id: 1,
-          nome: 'Front End',
-          descricao: 'Uma categoria bacanudassa',
-          cor: '#cbd1ff',
-        },
-        {
-          id: 2,
-          nome: 'Back End',
-          descricao: 'Uma outra categoria bacanudassa',
-          cor: '#cbd1ff',
-        },
-
-      ]);
-    }, 4 * 1000);
-  }, */ });
+  }, []);
 
   return (
     <PageDefault>
